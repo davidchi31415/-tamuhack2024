@@ -81,16 +81,16 @@ const LearnPage = () => {
     if (prompt !== "") {
       console.log("submitting prompt: ", prompt);
 
-      // let res = await fetch("/api/prompt", {
-      //   method: "POST",
-      //   body: JSON.stringify({ prompt }),
-      // }).then((res) => res.json());
+      let res = await fetch("/api/prompt", {
+        method: "POST",
+        body: JSON.stringify({ prompt }),
+      }).then((res) => res.json());
 
-      // console.log(res.id);
+      console.log(res.id);
 
-      // let id = res.id;
+      let id = res.id;
 
-      let id = 1;
+      // let id = 1;
       router.push(`/learn/?id=${id}`);
       window.location.replace(`/learn/?id=${id}`);
     } else {
@@ -146,7 +146,7 @@ const LearnPage = () => {
             justifyContent: "center",
           }}>
           <div
-            className="p-10 text-2xl"
+            className="p-10 text-2xl pt-20"
             style={{
               backgroundColor: "#DACABD",
               background: "rgba(218, 202, 189, 0.5)",
@@ -157,11 +157,12 @@ const LearnPage = () => {
               alignItems: "center",
               justifyContent: "center",
               margin: "0 auto",
+              overflow: "auto", // Add this line
             }}>
             {progress < 100 ? (
               <Progress value={progress} style={{}} />
             ) : (
-              transcript
+              <>{"\n"}transcript</>
             )}
           </div>
         </div>
