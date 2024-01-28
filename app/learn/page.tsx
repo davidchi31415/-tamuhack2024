@@ -14,6 +14,7 @@ import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import { InfiniteLoaderComponent } from "@/components/loader/infinite-loader";
 
 const LearnPage = () => {
   const router = useRouter();
@@ -104,24 +105,12 @@ const LearnPage = () => {
     <div>
       <Navbar />
       {/* Video and Transcript */}
-      <div
-        className="flex mt-10 mb-5"
-        style={{
-          alignItems: "center",
-        }}>
-        <div style={{ width: "20%" }}></div>
-        <div
-          className="Video bg-red p-10 text-center flex"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "650px",
-            width: "30%",
-          }}>
-          <div
+      <div className="flex items-center justify-center gap-8 py-10">
+        <div className="shadow-3xl">
+            {videoLink === "" ?
+            <div
             style={{
-              backgroundImage: `url(${image})`,
+              backgroundImage: "url(/Pusheen.png)",
               backgroundSize: "contain",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -129,46 +118,29 @@ const LearnPage = () => {
               width: "600px",
               justifyContent: "end",
               aspectRatio: "1/1",
-            }}>
+            }} /> :
             <video
               controls
               src={videoLink}
-              style={{ width: "600px", height: "600px" }}
-            />
+              style={{ width: "512px", height: "512px" }}
+            />}
+          </div>
+          <div className="w-[512px] h-[512px] flex flex-col items-center justify-between gap-0 rounded-4">
+            <div className="w-full h-[5rem] bg-[#5E5349] flex items-center justify-center font-bold text-2xl text-white">
+              {progress === 100 ? "Pusheen's Adventure Story" : "Writing Pusheen's Adventure Story..."}
+            </div>
+            <div className="border-black h-full w-full bg-[#fafafa] shadow-3xl
+              p-4
+              "
+            >
+              {
+                !transcript ?
+                transcript : <div className="text-7xl flex items-center justify-center h-full text-[#5E5349]">{progress}%</div>
+              }
+            </div>
+            <InfiniteLoaderComponent />
           </div>
         </div>
-        <div
-          className="Transcript p-10 text-center"
-          style={{
-            height: "30em",
-            width: "30%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
-          <div
-            className="p-10 text-2xl pt-20"
-            style={{
-              backgroundColor: "#DACABD",
-              background: "rgba(218, 202, 189, 0.5)",
-              height: "100%",
-              // width: "512px",
-              borderRadius: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto",
-              overflow: "auto", // Add this line
-            }}>
-            {progress < 100 ? (
-              <Progress value={progress} style={{}} />
-            ) : (
-              <>{"\n"}{transcript}</>
-            )}
-          </div>
-        </div>
-
-        <div style={{ width: "20%" }}></div>
-      </div>
 
       {/* Text Input Area */}
       <div className="text-center justify-center">
