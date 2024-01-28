@@ -80,8 +80,10 @@ const LearnPage = () => {
               backgroundColor: "#DACABD",
               background: "rgba(218, 202, 189, 0.5)",
               borderRadius: "10px 0 0 10px",
+              pointerEvents: "none", // Disable hover pointer
             }}
-            className="p-2">
+            className="p-2"
+          >
             <FaArrowRight size={80} color="rgba(218, 202, 189, 0)" />
           </Button>
           <div
