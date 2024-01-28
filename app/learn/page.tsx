@@ -43,8 +43,25 @@ const LearnPage = () => {
     }
   };
 
-  const handleNexSceneClick = () => {
+  const handleNextSceneClick = () => {
     console.log("next scene");
+
+    // let options = {
+    //   method: "POST",
+    //   headers: {
+    //     "xi-api-key": "474d624b36fb541c15cd78739c8f9250",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: '{"model_id":"eleven_monolingual_v1","text":"Hello! This is reading off of a transcription.","voice_settings":{"similarity_boost":0.5,"stability":0.5}}',
+    // };
+
+    // fetch(
+    //   "https://api.elevenlabs.io/v1/text-to-speech/XrExE9yKIg1WjnnlVkGX",
+    //   options
+    // )
+    //   .then((response) => response.json())
+    //   .then((response) => console.log(response))
+    //   .catch((err) => console.error(err));
   };
 
   return (
@@ -55,9 +72,19 @@ const LearnPage = () => {
         <div
           className="Video bg-red p-10 text-center flex"
           style={{ height: "600px", width: "50%" }}>
-          {/* INSERT VIDEO HERE */}
+          <Button
+            style={{
+              flex: 1,
+              height: "100%",
+              width: "7em",
+              backgroundColor: "#DACABD",
+              background: "rgba(218, 202, 189, 0.5)",
+              borderRadius: "10px 0 0 10px",
+            }}
+            className="p-2">
+            <FaArrowRight size={80} color="rgba(218, 202, 189, 0)" />
+          </Button>
           <div
-            className="ms-10"
             // style={{ backgroundColor: "black", height: "100%", width: "85%" }}>
             style={{
               backgroundImage: `url(${image})`,
@@ -66,12 +93,23 @@ const LearnPage = () => {
               height: "100%",
               width: "100%",
               border: "black 1px solid",
+              justifyContent: "end",
             }}></div>
-
-          {/* <Button style={{ flex: 1, height: "100%" }}>
-            next scene
-            <FaArrowRight size={40} />
-          </Button> */}
+          <Button
+            style={{
+              flex: 1,
+              height: "100%",
+              width: "7em",
+              backgroundColor: "#DACABD",
+              background: "rgba(218, 202, 189, 0.5)",
+              borderRadius: "0 10px 10px 0",
+            }}
+            onClick={() => {
+              handleNextSceneClick();
+            }}
+            className="p-2">
+            <FaArrowRight size={80} color="#532803" />
+          </Button>
         </div>
         <div
           className="Transcript p-10 text-center"
