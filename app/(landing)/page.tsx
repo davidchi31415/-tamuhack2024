@@ -5,15 +5,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const LandingPage = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [suggestionVal1, setsuggestionVal1] = useState("Do Plants Eat?");
+  const [suggestionVal2, setSuggestionVal2] = useState("How do rockets fly?");
+  const [suggestionVal3, setSuggestionVal3] = useState("What is gravity?");
+  const [suggestionVal4, setSuggestionVal4] = useState("How do you multiply?");
+  const [suggestionVal5, setSuggestionVal5] = useState("What are fractions?");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setPrompt(event.target.value);
   };
 
-  const handleEnterClick = () => {
-    // Handle enter button click here
-    console.log("Enter button clicked");
+  const handleEnterClick = (prompt) => {
+    console.log("submitting prompt: ", prompt);
   };
 
   return (
@@ -32,7 +36,7 @@ const LandingPage = () => {
             justifyContent: "center",
           }}>
           <Input
-            value={inputValue}
+            value={prompt}
             onChange={handleInputChange}
             placeholder="enter a topic"
             className="text-2xl"
@@ -47,12 +51,14 @@ const LandingPage = () => {
           <Button
             type="submit"
             className="text-2xl"
+            onClick={() => {
+              handleEnterClick(prompt);
+            }}
             style={{
               height: "3em",
               borderRadius: "0 10px 10px 0",
               backgroundColor: "rgba(184, 166, 152, 0.5)",
               color: "#5E5349",
-
               borderLeft: `1px solid rgba(184, 166, 152, 0.5)`,
             }}>
             submit
@@ -66,11 +72,76 @@ const LandingPage = () => {
             width: "35%",
             justifyContent: "center",
           }}>
-          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
+          <Button
+            type="submit"
+            className="text-xl"
+            onClick={() => {
+              handleEnterClick(suggestionVal1);
+            }}
+            style={{
+              height: "3em",
+              borderRadius: "10px",
+              backgroundColor: "rgba(184, 166, 152, 0.5)",
+              color: "#5E5349",
+            }}>
+            {suggestionVal1}
+          </Button>
+          <Button
+            type="submit"
+            className="text-xl"
+            onClick={() => {
+              handleEnterClick(suggestionVal2);
+            }}
+            style={{
+              height: "3em",
+              borderRadius: "10px",
+              backgroundColor: "rgba(184, 166, 152, 0.5)",
+              color: "#5E5349",
+            }}>
+            {suggestionVal2}
+          </Button>
+          <Button
+            type="submit"
+            className="text-xl"
+            onClick={() => {
+              handleEnterClick(suggestionVal3);
+            }}
+            style={{
+              height: "3em",
+              borderRadius: "10px",
+              backgroundColor: "rgba(184, 166, 152, 0.5)",
+              color: "#5E5349",
+            }}>
+            {suggestionVal3}
+          </Button>
+          <Button
+            type="submit"
+            className="text-xl"
+            onClick={() => {
+              handleEnterClick(suggestionVal4);
+            }}
+            style={{
+              height: "3em",
+              borderRadius: "10px",
+              backgroundColor: "rgba(184, 166, 152, 0.5)",
+              color: "#5E5349",
+            }}>
+            {suggestionVal4}
+          </Button>
+          <Button
+            type="submit"
+            className="text-xl"
+            onClick={() => {
+              handleEnterClick(suggestionVal5);
+            }}
+            style={{
+              height: "3em",
+              borderRadius: "10px",
+              backgroundColor: "rgba(184, 166, 152, 0.5)",
+              color: "#5E5349",
+            }}>
+            {suggestionVal5}
+          </Button>
         </div>
       </div>
     </div>
