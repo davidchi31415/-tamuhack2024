@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model UserAccount {
+  id String @id @default(cuid())
+  userId String @unique
+  stripeId String?
+  cloneCredits Int @default(2)
+  convertCredits Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConvertJob {
+  id String @id @default(cuid())
+  userId String
+  songName String
+  hasInstrumentals Boolean? // MUST be filled in before submitting
+  hasBackingVocals Boolean? // MUST be filled in before submitting
+  convertBackingVocals Boolean? // MUST be filled in before submitting
+  runpodJobId String? // MUST be filled in after job is submitted
+  // NOT_SUBMITTED, DOWNLOADING, WAITING_FOR_GPU, IN_PROGRESS, COMPLETED, FAILED, CANCELLED, TIMED_OUT
+  status String @default("NOT_SUBMITTED")
+  message String? // Only if FAILED
+  userMessage String? // only if FAILED and message needed to relay to user
+  public Boolean @default(false)
+  retries Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CloneJob {
+  id String @id @default(cuid())
+  userId String
+  runpodJobId String? // MUST be filled in after job is created
+  // NOT_SUBMITTED, WAITING_FOR_GPU, IN_PROGRESS, COMPLETED, FAILED, CANCELLED, TIMED_OUT
+  status String @default("NOT_SUBMITTED")
+  message String? // Only if FAILED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Clone {
+  id String @id // provided by cloneJob.id
+  userId String @unique
+  public Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id String @id @default(cuid())
+  type String // CONVERT, CLONE
+  jobId String
+  soundsLike Boolean
+  rating Int?
+  reason String?
+  comment String?
+  songName String? // CONVERT only
+
+  @@unique([type, jobId])
+}
