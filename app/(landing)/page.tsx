@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 
 const LandingPage = () => {
   const router = useRouter();
+  const intro =
+    "hello!! i'm pusheen, and i make ai videos to explain any stem topic of your choice!\n click the arrow to begin :3";
 
   const handleEnterClick = async (prompt) => {
     router.push(`/prompt`);
@@ -17,9 +19,21 @@ const LandingPage = () => {
 
   return (
     <div style={{ backgroundColor: "#FCEFE2" }}>
-      <Navbar />
+      <div style={{height: "50px"}}></div>
       <div
-        className="text-center my-20"
+        className="text-center mt-20 text-3xl mx-auto"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "200px",
+          color: "#532803",
+          width: "30%",
+        }}>
+        {intro}
+      </div>
+      <div
+        className="text-center mt-10 mb-20"
         style={{ display: "flex", justifyContent: "center" }}>
         <img
           // src="/Pusheen.png"
@@ -33,7 +47,6 @@ const LandingPage = () => {
         />
       </div>
       <div className="text-center justify-center">
-        <h1 className="text-6xl mb-10">what do you want to learn about?</h1>
         <div
           style={{
             display: "flex",

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
+import { Navbar } from "@/components/navbar";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -42,6 +43,7 @@ const LandingPage = () => {
 
   return (
     <div style={{ backgroundColor: "#FCEFE2" }}>
+      <Navbar />
       <div
         className="text-center my-20"
         style={{ display: "flex", justifyContent: "center" }}>
@@ -75,7 +77,6 @@ const LandingPage = () => {
               backgroundColor: "rgba(184, 166, 152, 0.5)",
               borderRadius: "10px 0 0 10px",
               color: "#5E5349",
-              fontFamily: "Comfortaa",
             }}
           />
           <Button
