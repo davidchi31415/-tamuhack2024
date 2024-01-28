@@ -1,13 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Rubik, Comfortaa } from "next/font/google";
 import { ModalProvider } from "@/components/modal-provider";
 import { ToasterProvider } from "@/components/toaster-provider";
 import { Navbar } from "@/components/navbar";
 import { getCredits } from "@/lib/credits";
 import NextTopLoader from "nextjs-toploader";
 
-const rubik = Rubik({ subsets: ["latin"] });
+const comfortaa = Comfortaa({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "pusheen.ai",
@@ -24,10 +24,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { convertCredits } = await getUserData();
   return (
     <html lang="en">
-      <body className={rubik.className}>
+      <body className={comfortaa.className}>
         <div className="z-[9999]">
           <NextTopLoader color="#3b82f6" height={5} />
         </div>

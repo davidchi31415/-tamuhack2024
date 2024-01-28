@@ -1,24 +1,44 @@
 "use client";
 
+import React, { useEffect } from "react";
 import { useState } from "react";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import React from "react";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const LearnPage = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const promptId = searchParams.get("id");
+
   const [prompt, setPrompt] = useState("");
   const [suggestionVal1, setSuggestionVal1] = useState("how do rockets fly?");
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
-  const [transcript, setTranscript] = useState("Transcript");
+  const [transcript, setTranscript] = useState(
+    "This is a very long transript of the video that is SUPER interesting. I love STEM so much and I am positively enthused to be an engineer."
+  );
+
+  useEffect(() => {
+    console.log(promptId);
+  });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
   };
 
   const handleEnterClick = (prompt) => {
-    console.log("submitting prompt: ", prompt);
+    if (prompt !== "") {
+      console.log("submitting prompt: ", prompt);
+      let id = Math.floor(Date.now() / 1000);
+      router.push(`/learn/?id=${id}`);
+    } else {
+      console.log("prompt is empty");
+    }
   };
 
   return (
