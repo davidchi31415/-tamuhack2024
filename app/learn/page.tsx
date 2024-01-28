@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/navbar";
 
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -19,9 +20,7 @@ const LearnPage = () => {
   const [suggestionVal1, setSuggestionVal1] = useState("how do rockets fly?");
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
-  const [transcript, setTranscript] = useState(
-    "Loading transcript..."
-  );
+  const [transcript, setTranscript] = useState("Loading transcript...");
 
   useEffect(() => {
     console.log(promptId);
@@ -43,6 +42,7 @@ const LearnPage = () => {
 
   return (
     <div>
+      <Navbar />
       {/* Video and Transcript */}
       <div className="flex mt-20 mb-10">
         <div
