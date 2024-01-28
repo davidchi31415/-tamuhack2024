@@ -5,10 +5,9 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import "./landing.css";
 import { useRouter } from "next/navigation";
 
-const PromptPage = () => {
+const LandingPage = () => {
   const router = useRouter();
 
   const [prompt, setPrompt] = useState("");
@@ -23,9 +22,17 @@ const PromptPage = () => {
     setPrompt(event.target.value);
   };
 
-  const handleEnterClick = (prompt) => {
+  const handleEnterClick = async (prompt) => {
     if (prompt !== "") {
       console.log("submitting prompt: ", prompt);
+
+      // let res = await fetch("/api/submit", {
+      //   method: "POST",
+      //   body: JSON.stringify({ prompt }),
+      // }).then((res) => res.json());
+
+      // console.log(res);
+      
       let id = Math.floor(Date.now() / 1000);
       router.push(`/learn/?id=${id}`);
     } else {
@@ -34,7 +41,7 @@ const PromptPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#FCEFE2" }}>
       <div
         className="text-center my-20"
         style={{ display: "flex", justifyContent: "center" }}>
@@ -171,4 +178,4 @@ const PromptPage = () => {
   );
 };
 
-export default PromptPage;
+export default LandingPage;

@@ -20,7 +20,7 @@ const LearnPage = () => {
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
   const [transcript, setTranscript] = useState(
-    "This is a very long transript of the video that is SUPER interesting. I love STEM so much and I am positively enthused to be an engineer."
+    "Loading transcript..."
   );
 
   useEffect(() => {
@@ -48,6 +48,7 @@ const LearnPage = () => {
         <div
           className="Video bg-red p-10 text-center"
           style={{ height: "600px", width: "50%" }}>
+          {/* INSERT VIDEO HERE */}
           <div style={{ backgroundColor: "black", height: "100%" }}>Video</div>
         </div>
         <div

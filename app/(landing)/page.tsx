@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import "./landing.css";
 import { useRouter } from "next/navigation";
 
 const LandingPage = () => {
@@ -23,18 +22,26 @@ const LandingPage = () => {
     setPrompt(event.target.value);
   };
 
-  const handleEnterClick = (prompt) => {
+  const handleEnterClick = async (prompt) => {
     if (prompt !== "") {
       console.log("submitting prompt: ", prompt);
-      let id = Math.floor(Date.now() / 1000);
-      router.push(`/learn/?id=${id}`);
+
+      let res = await fetch("/api/submit", {
+        method: "POST",
+        body: JSON.stringify({ prompt }),
+      }).then((res) => res.json());
+
+      console.log(res);
+
+      // let id = Math.floor(Date.now() / 1000);
+      // router.push(`/learn/?id=${id}`);
     } else {
       console.log("prompt is empty");
     }
   };
 
   return (
-    <div style={{backgroundColor: "#FCEFE2"}}>
+    <div style={{ backgroundColor: "#FCEFE2" }}>
       <div
         className="text-center my-20"
         style={{ display: "flex", justifyContent: "center" }}>
@@ -68,7 +75,6 @@ const LandingPage = () => {
               backgroundColor: "rgba(184, 166, 152, 0.5)",
               borderRadius: "10px 0 0 10px",
               color: "#5E5349",
-              fontFamily: "Comfortaa",
             }}
           />
           <Button

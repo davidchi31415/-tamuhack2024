@@ -9,7 +9,7 @@ export const Navbar = () => {
                 flex items-center justify-center fixed top-0 md:relative
                 bg-[white] border-b-2 z-[1000]"
       style={{ backgroundColor: "#5E5349" }}>
-      <Link href="/" className="flex items-center justify-center w-100">
+      <Link href="/prompt" className="flex items-center justify-center w-100">
         <h1
           className={"text-5xl font-bold hidden lg:block"}
           style={{ color: "white" }}>
