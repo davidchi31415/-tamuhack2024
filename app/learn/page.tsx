@@ -22,12 +22,44 @@ const LearnPage = () => {
   const [suggestionVal1, setSuggestionVal1] = useState("how do rockets fly?");
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
+  const [transcript1, setTranscript1] = useState("1");
+  const [transcript2, setTranscript2] = useState("2");
+  const [transcript3, setTranscript3] = useState("3");
   const [transcript, setTranscript] = useState("Loading transcript...");
+  const [image1, setImage1] = useState("scene_0.jpg");
+  const [image2, setImage2] = useState("pusheen-pawing.gif");
+  const [image3, setImage3] = useState("scene_0.jpg");
   const [image, setImage] = useState("Pusheen.png");
+  const [currScene, setCurrScene] = useState(0);
+
+  const loadImage = "Pusheen.png";
+  const loadText = "Loading transcript...";
 
   useEffect(() => {
     console.log(promptId);
-  });
+    setImage(loadImage);
+    setTranscript(loadText);
+    setCurrScene(0);
+    setPrompt("");
+  }, []);
+
+  useEffect(() => {
+    if (currScene == 1) {
+      setTranscript(transcript1);
+      setImage(image1);
+    } else if (currScene == 2) {
+      setTranscript(transcript2);
+      setImage(image2);
+    } else if (currScene == 3) {
+      setTranscript(transcript3);
+      setImage(image3);
+    } else {
+      console.log("Scene not loaded");
+      setImage(loadImage);
+      setTranscript(loadText);
+      setPrompt("");
+    }
+  }, [currScene]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
@@ -45,88 +77,87 @@ const LearnPage = () => {
 
   const handleNextSceneClick = () => {
     console.log("next scene");
-
-    // let options = {
-    //   method: "POST",
-    //   headers: {
-    //     "xi-api-key": "474d624b36fb541c15cd78739c8f9250",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: '{"model_id":"eleven_monolingual_v1","text":"Hello! This is reading off of a transcription.","voice_settings":{"similarity_boost":0.5,"stability":0.5}}',
-    // };
-
-    // fetch(
-    //   "https://api.elevenlabs.io/v1/text-to-speech/XrExE9yKIg1WjnnlVkGX",
-    //   options
-    // )
-    //   .then((response) => response.json())
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.error(err));
+    if (currScene >= 0) {
+      setCurrScene(currScene + 1);
+    } else {
+      console.log("Scene not loaded");
+    }
   };
 
   return (
     <div>
       <Navbar />
       {/* Video and Transcript */}
-      <div className="flex mt-20 mb-5">
+      <div className="flex mt-10 mb-5">
+        <div style={{ width: "20%" }}></div>
         <div
           className="Video bg-red p-10 text-center flex"
-          style={{ height: "600px", width: "50%" }}>
-          <Button
-            style={{
-              flex: 1,
-              height: "100%",
-              width: "7em",
-              backgroundColor: "#DACABD",
-              background: "rgba(218, 202, 189, 0.5)",
-              borderRadius: "10px 0 0 10px",
-              pointerEvents: "none", // Disable hover pointer
-            }}
-            className="p-2"
-          >
-            <FaArrowRight size={80} color="rgba(218, 202, 189, 0)" />
-          </Button>
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "650px",
+            width: "30%",
+          }}>
           <div
-            // style={{ backgroundColor: "black", height: "100%", width: "85%" }}>
             style={{
               backgroundImage: `url(${image})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
-              height: "100%",
-              width: "100%",
-              border: "black 1px solid",
+              backgroundRepeat: "no-repeat",
+              height: "600px",
+              width: "600px",
               justifyContent: "end",
+              aspectRatio: "1/1",
             }}></div>
-          <Button
-            style={{
-              flex: 1,
-              height: "100%",
-              width: "7em",
-              backgroundColor: "#DACABD",
-              background: "rgba(218, 202, 189, 0.5)",
-              borderRadius: "0 10px 10px 0",
-            }}
-            onClick={() => {
-              handleNextSceneClick();
-            }}
-            className="p-2">
-            <FaArrowRight size={80} color="#532803" />
-          </Button>
         </div>
         <div
           className="Transcript p-10 text-center"
-          style={{ height: "600px", width: "50%" }}>
+          style={{
+            height: "30em",
+            width: "30%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
           <div
             className="p-10 text-2xl"
             style={{
               backgroundColor: "#DACABD",
               background: "rgba(218, 202, 189, 0.5)",
               height: "100%",
+              // width: "512px",
               borderRadius: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto", // Add this line to center the div horizontally
             }}>
             {transcript}
           </div>
+
+          {currScene < 3 ? (
+            <Button
+              style={{
+                flex: 1,
+                width: "50%",
+                height: "3em",
+                backgroundColor: "#DACABD",
+                background: "rgba(218, 202, 189, 0.5)",
+                borderRadius: "10px",
+                color: "#532803",
+              }}
+              onClick={() => {
+                handleNextSceneClick();
+              }}
+              className="p-2 text-3xl mt-10">
+              next scene! {/* <FaArrowRight size={40} color="#532803" /> */}
+            </Button>
+          ) : (
+            ""
+          )}
         </div>
+
+        <div style={{ width: "20%" }}></div>
       </div>
 
       {/* Text Input Area */}
