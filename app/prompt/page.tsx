@@ -92,7 +92,7 @@ const LandingPage = () => {
               color: "#5E5349",
               borderLeft: `1px solid rgba(184, 166, 152, 0.5)`,
             }}>
-            submit
+            let's go!
           </Button>
         </div>
         <div

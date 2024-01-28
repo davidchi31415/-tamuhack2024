@@ -1,5 +1,7 @@
 "use client";
 
+import { FaArrowRight } from "react-icons/fa";
+
 import React, { useEffect } from "react";
 import { useState } from "react";
 
@@ -21,6 +23,7 @@ const LearnPage = () => {
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
   const [transcript, setTranscript] = useState("Loading transcript...");
+  const [image, setImage] = useState("Pusheen.png");
 
   useEffect(() => {
     console.log(promptId);
@@ -40,16 +43,35 @@ const LearnPage = () => {
     }
   };
 
+  const handleNexSceneClick = () => {
+    console.log("next scene");
+  };
+
   return (
     <div>
       <Navbar />
       {/* Video and Transcript */}
-      <div className="flex mt-20 mb-10">
+      <div className="flex mt-20 mb-5">
         <div
-          className="Video bg-red p-10 text-center"
+          className="Video bg-red p-10 text-center flex"
           style={{ height: "600px", width: "50%" }}>
           {/* INSERT VIDEO HERE */}
-          <div style={{ backgroundColor: "black", height: "100%" }}>Video</div>
+          <div
+            className="ms-10"
+            // style={{ backgroundColor: "black", height: "100%", width: "85%" }}>
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "100%",
+              width: "100%",
+              border: "black 1px solid",
+            }}></div>
+
+          {/* <Button style={{ flex: 1, height: "100%" }}>
+            next scene
+            <FaArrowRight size={40} />
+          </Button> */}
         </div>
         <div
           className="Transcript p-10 text-center"
@@ -57,7 +79,8 @@ const LearnPage = () => {
           <div
             className="p-10 text-2xl"
             style={{
-              backgroundColor: "#D9D9D9",
+              backgroundColor: "#DACABD",
+              background: "rgba(218, 202, 189, 0.5)",
               height: "100%",
               borderRadius: "10px",
             }}>
@@ -68,6 +91,7 @@ const LearnPage = () => {
 
       {/* Text Input Area */}
       <div className="text-center justify-center">
+        <div className="text-3xl mb-5">continue learning?</div>
         <div
           style={{
             display: "flex",
@@ -100,7 +124,7 @@ const LearnPage = () => {
               color: "#5E5349",
               borderLeft: `1px solid rgba(184, 166, 152, 0.5)`,
             }}>
-            submit
+            let's go!
           </Button>
         </div>
         <div
