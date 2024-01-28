@@ -162,7 +162,7 @@ const LearnPage = () => {
             {progress < 100 ? (
               <Progress value={progress} style={{}} />
             ) : (
-              <>{"\n"}transcript</>
+              <>{"\n"}{transcript}</>
             )}
           </div>
         </div>
