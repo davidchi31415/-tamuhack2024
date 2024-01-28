@@ -54,7 +54,7 @@ export default async function RootLayout({
         <ModalProvider />
         <ToasterProvider />
         <div className="w-full h-full pt-12 md:pt-0 overflow-x-clip">
-          <Navbar convertCredits={convertCredits} />
+          <Navbar/>
           {children}
         </div>
       </body>
