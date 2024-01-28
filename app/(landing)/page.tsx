@@ -58,12 +58,19 @@ const LandingPage = () => {
             submit
           </Button>
         </div>
-        <div className="sugestionContainer my-10 mx-auto gap-10" style={{ display: "flex", flexWrap: "wrap", width: "35%", justifyContent: "center"}}>
-          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
-          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
+        <div
+          className="sugestionContainer my-10 mx-auto gap-10"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "35%",
+            justifyContent: "center",
+          }}>
+          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%" }}>Do plants Eat?</div>
         </div>
       </div>
     </div>
