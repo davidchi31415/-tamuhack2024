@@ -2,15 +2,18 @@
 
 import { FaArrowRight } from "react-icons/fa";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/navbar";
 
+import { Progress } from "@/components/ui/progress";
+
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
 const LearnPage = () => {
   const router = useRouter();
@@ -18,36 +21,84 @@ const LearnPage = () => {
 
   const promptId = searchParams.get("id");
 
+  const [progress, setProgress] = React.useState(5);
+  const intervalId = useRef<any>(null);
+
   const [prompt, setPrompt] = useState("");
   const [suggestionVal1, setSuggestionVal1] = useState("how do rockets fly?");
   const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
   const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
-  const [transcript1, setTranscript1] = useState("1");
-  const [transcript2, setTranscript2] = useState("2");
-  const [transcript3, setTranscript3] = useState("3");
   const [transcript, setTranscript] = useState("Loading transcript...");
   const [image, setImage] = useState("scene_0.jpg");
 
-  // const loadImage = "Pusheen.png";
-  // const loadText = "Loading transcript...";
+  const [videoLink, setVideoLink] = useState("");
 
   useEffect(() => {
-    console.log("jobId:", promptId);
-  }, []);
+    const getResults = async () => {
+      const res = await axios.get("/api/results", { params: { id: promptId } });
+      const { videoURL, script } = res.data;
+      setVideoLink(videoURL);
+      setTranscript(script);
+    };
+
+    if (progress === 100) {
+      if (videoLink === "") {
+        getResults();
+      }
+    } else {
+      intervalId.current = setInterval(async () => {
+        await checkProgress();
+      }, 5000);
+    }
+
+    return () => clearInterval(intervalId.current);
+  }, [transcript, videoLink, progress]);
+
+  const checkProgress = async () => {
+    console.log("checking progress");
+    let response = await axios.get("/api/status", { params: { id: promptId } });
+
+    if (response.status === 200) {
+      const newStatus = response.data.workingOn;
+
+      if (newStatus === "DONE") {
+        setProgress(100);
+      } else if (newStatus === "VIDEO") {
+        setProgress(75);
+      } else if (newStatus === "AUDIO") {
+        setProgress(50);
+      } else if (newStatus === "IMAGES") {
+        setProgress(25);
+      }
+    }
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
   };
 
-  const handleEnterClick = (prompt) => {
+  const handleEnterClick = async (prompt) => {
     if (prompt !== "") {
       console.log("submitting prompt: ", prompt);
-      let id = Math.floor(Date.now() / 1000);
+
+      // let res = await fetch("/api/prompt", {
+      //   method: "POST",
+      //   body: JSON.stringify({ prompt }),
+      // }).then((res) => res.json());
+
+      // console.log(res.id);
+
+      // let id = res.id;
+
+      let id = 1;
       router.push(`/learn/?id=${id}`);
+      window.location.replace(`/learn/?id=${id}`);
     } else {
       console.log("prompt is empty");
     }
   };
+
+  const scenes = transcript.split("|||||");
 
   return (
     <div>
@@ -78,7 +129,13 @@ const LearnPage = () => {
               width: "600px",
               justifyContent: "end",
               aspectRatio: "1/1",
-            }}></div>
+            }}>
+            <video
+              controls
+              src={videoLink}
+              style={{ width: "600px", height: "600px" }}
+            />
+          </div>
         </div>
         <div
           className="Transcript p-10 text-center"
@@ -99,9 +156,13 @@ const LearnPage = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              margin: "0 auto", // Add this line to center the div horizontally
+              margin: "0 auto",
             }}>
-            {transcript}
+            {progress < 100 ? (
+              <Progress value={progress} style={{}} />
+            ) : (
+              transcript
+            )}
           </div>
         </div>
 

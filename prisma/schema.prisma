@@ -16,4 +16,5 @@ model Job {
   done_image Boolean @default(false)
   done_audio Boolean @default(false)
   done_video Boolean @default(false)
+  script     String  @default("")
 }

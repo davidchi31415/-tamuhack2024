@@ -3,13 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { exclude } from "@/lib/utils";
 import prismadb from "@/lib/prismadb";
-import { getDownloadURL } from "@/lib/gcloud";
+import { getDownloadURL, getTextFile } from "@/lib/gcloud";
 
 const getResults = async ({ jobId }) => {
     const videoURL = await getDownloadURL({ directory: `${jobId}`, fileName: "final.mp4" });
-    const scriptURL = await getDownloadURL({ directory: `${jobId}`, fileName: "script.txt" });
+    const script = await getTextFile({ directory: `${jobId}`, fileName: "script.txt" }).then(res => res.toString());
 
-    return { videoURL, scriptURL };
+    return { videoURL, script };
 }
 
 export async function GET(
@@ -30,6 +30,7 @@ export async function GET(
         }
 
         const results = await getResults({ jobId });
+        console.log(results);
         if (!results) return new NextResponse("Internal error retrieving results", { status: 400 });
 
         return new NextResponse(JSON.stringify(results), { status: 200 });

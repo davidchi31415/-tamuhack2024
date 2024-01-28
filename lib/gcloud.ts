@@ -11,7 +11,7 @@ const storageOptions = {
 };
 const storage = new Storage(storageOptions);
 
-const bucketName = "sainatra";
+const bucketName = "pusheen";
 const bucket = storage.bucket(bucketName);
 
 interface GCloudProps {
@@ -46,6 +46,13 @@ export const getDownloadURL = async ({directory, fileName}: GCloudProps) => {
     const [url]: any = await file.getSignedUrl(options);
 
     return url;
+}
+
+export const getTextFile = async ({directory, fileName}: GCloudProps) => {
+    const file = bucket.file(`${directory}/${fileName}`);
+    const [content]: any = await file.download();
+
+    return content;
 }
 
 export const checkFileExists = async ({directory, fileName}: GCloudProps) => {
