@@ -26,40 +26,14 @@ const LearnPage = () => {
   const [transcript2, setTranscript2] = useState("2");
   const [transcript3, setTranscript3] = useState("3");
   const [transcript, setTranscript] = useState("Loading transcript...");
-  const [image1, setImage1] = useState("scene_0.jpg");
-  const [image2, setImage2] = useState("pusheen-pawing.gif");
-  const [image3, setImage3] = useState("scene_0.jpg");
-  const [image, setImage] = useState("Pusheen.png");
-  const [currScene, setCurrScene] = useState(0);
+  const [image, setImage] = useState("scene_0.jpg");
 
-  const loadImage = "Pusheen.png";
-  const loadText = "Loading transcript...";
+  // const loadImage = "Pusheen.png";
+  // const loadText = "Loading transcript...";
 
   useEffect(() => {
-    console.log(promptId);
-    setImage(loadImage);
-    setTranscript(loadText);
-    setCurrScene(0);
-    setPrompt("");
+    console.log("jobId:", promptId);
   }, []);
-
-  useEffect(() => {
-    if (currScene == 1) {
-      setTranscript(transcript1);
-      setImage(image1);
-    } else if (currScene == 2) {
-      setTranscript(transcript2);
-      setImage(image2);
-    } else if (currScene == 3) {
-      setTranscript(transcript3);
-      setImage(image3);
-    } else {
-      console.log("Scene not loaded");
-      setImage(loadImage);
-      setTranscript(loadText);
-      setPrompt("");
-    }
-  }, [currScene]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
@@ -75,20 +49,15 @@ const LearnPage = () => {
     }
   };
 
-  const handleNextSceneClick = () => {
-    console.log("next scene");
-    if (currScene >= 0) {
-      setCurrScene(currScene + 1);
-    } else {
-      console.log("Scene not loaded");
-    }
-  };
-
   return (
     <div>
       <Navbar />
       {/* Video and Transcript */}
-      <div className="flex mt-10 mb-5">
+      <div
+        className="flex mt-10 mb-5"
+        style={{
+          alignItems: "center",
+        }}>
         <div style={{ width: "20%" }}></div>
         <div
           className="Video bg-red p-10 text-center flex"
@@ -134,27 +103,6 @@ const LearnPage = () => {
             }}>
             {transcript}
           </div>
-
-          {currScene < 3 ? (
-            <Button
-              style={{
-                flex: 1,
-                width: "50%",
-                height: "3em",
-                backgroundColor: "#DACABD",
-                background: "rgba(218, 202, 189, 0.5)",
-                borderRadius: "10px",
-                color: "#532803",
-              }}
-              onClick={() => {
-                handleNextSceneClick();
-              }}
-              className="p-2 text-3xl mt-10">
-              next scene! {/* <FaArrowRight size={40} color="#532803" /> */}
-            </Button>
-          ) : (
-            ""
-          )}
         </div>
 
         <div style={{ width: "20%" }}></div>

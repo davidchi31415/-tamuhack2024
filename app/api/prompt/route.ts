@@ -19,7 +19,7 @@ export async function POST(
             }
         });
         const response = await axios.post(
-            `${process.env.DATABASE_URL!}/api/submit`,
+            `${process.env.RAILWAY_URL!}/api/submit`,
             {
                 jobId: job.id
             }, {

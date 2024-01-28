@@ -27,14 +27,14 @@ const LandingPage = () => {
     if (prompt !== "") {
       console.log("submitting prompt: ", prompt);
 
-      // let res = await fetch("/api/submit", {
-      //   method: "POST",
-      //   body: JSON.stringify({ prompt }),
-      // }).then((res) => res.json());
+      let res = await fetch("/api/prompt", {
+        method: "POST",
+        body: JSON.stringify({ prompt }),
+      }).then((res) => res.json());
 
-      // console.log(res);
+      console.log(res.id);
       
-      let id = Math.floor(Date.now() / 1000);
+      let id = res.id;
       router.push(`/learn/?id=${id}`);
     } else {
       console.log("prompt is empty");
