@@ -26,7 +26,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={comfortaa.className}>
+      <body className={comfortaa.className} style={{backgroundColor: "#FCEFE2"}}>
         <div className="z-[9999]">
           <NextTopLoader color="#3b82f6" height={5} />
         </div>

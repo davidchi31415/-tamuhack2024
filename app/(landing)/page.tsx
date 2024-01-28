@@ -34,11 +34,20 @@ const LandingPage = () => {
   };
 
   return (
-    <div>
+    <div style={{backgroundColor: "#FCEFE2"}}>
       <div
         className="text-center my-20"
         style={{ display: "flex", justifyContent: "center" }}>
-        <img src="/Pusheen.png" alt="Pusheen" style={{ maxHeight: "300px" }} />
+        <img
+          // src="/Pusheen.png"
+          src="/pusheen-pawing.gif"
+          alt="Pusheen"
+          style={{
+            maxHeight: "300px",
+            animation: "rotate 4s linear infinite",
+            transformOrigin: "center",
+          }}
+        />
       </div>
       <div className="text-center justify-center">
         <h1 className="text-6xl mb-10">what do you want to learn about?</h1>
