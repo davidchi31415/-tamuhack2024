@@ -18,13 +18,13 @@ const LandingPage = () => {
 
   return (
     <div>
-      <div style={{ height: "10em" }}></div>
-      <div className="text-center" style={{ display: "flex", justifyContent: "center" }}>
-        <img src="/Pusheen.png" alt="Pusheen" style={{ maxHeight: "200px" }} />
+      <div
+        className="text-center my-20"
+        style={{ display: "flex", justifyContent: "center" }}>
+        <img src="/Pusheen.png" alt="Pusheen" style={{ maxHeight: "300px" }} />
       </div>
-      <div style={{ height: "10em" }}></div>
       <div className="text-center justify-center">
-        <h1 className="text-6xl mb-10">What do you want to learn about?</h1>
+        <h1 className="text-6xl mb-10">what do you want to learn about?</h1>
         <div
           style={{
             display: "flex",
@@ -34,7 +34,7 @@ const LandingPage = () => {
           <Input
             value={inputValue}
             onChange={handleInputChange}
-            placeholder="Enter a topic"
+            placeholder="enter a topic"
             className="text-2xl"
             style={{
               width: "30%",
@@ -55,8 +55,15 @@ const LandingPage = () => {
 
               borderLeft: `1px solid rgba(184, 166, 152, 0.5)`,
             }}>
-            Submit
+            submit
           </Button>
+        </div>
+        <div className="sugestionContainer my-10 mx-auto gap-10" style={{ display: "flex", flexWrap: "wrap", width: "35%", justifyContent: "center"}}>
+          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
+          <div style={{ flex: "0 0 15%"}}>Do plants Eat?</div>
         </div>
       </div>
     </div>
