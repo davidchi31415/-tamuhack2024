@@ -4,16 +4,14 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import "./landing.css";
+import React from "react";
 
-const LandingPage = () => {
+const LearnPage = () => {
   const [prompt, setPrompt] = useState("");
-
-  const suggestionVal1 = "do plants eat?";
-  const suggestionVal2 = "how do rockets fly?";
-  const suggestionVal3 = "what is gravity?";
-  const suggestionVal4 = "how do you multiply?";
-  const suggestionVal5 = "what are fractions?";
+  const [suggestionVal1, setSuggestionVal1] = useState("how do rockets fly?");
+  const [suggestionVal2, setSuggestionVal2] = useState("what is gravity?");
+  const [suggestionVal3, setSuggestionVal3] = useState("do plants eat?");
+  const [transcript, setTranscript] = useState("Transcript");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
@@ -25,13 +23,30 @@ const LandingPage = () => {
 
   return (
     <div>
-      <div
-        className="text-center my-20"
-        style={{ display: "flex", justifyContent: "center" }}>
-        <img src="/Pusheen.png" alt="Pusheen" style={{ maxHeight: "300px" }} />
+      {/* Video and Transcript */}
+      <div className="flex mt-20 mb-10">
+        <div
+          className="Video bg-red p-10 text-center"
+          style={{ height: "600px", width: "50%" }}>
+          Video
+        </div>
+        <div
+          className="Transcript p-10 text-center"
+          style={{ height: "600px", width: "50%" }}>
+          <div
+            className="p-10 text-2xl"
+            style={{
+              backgroundColor: "#D9D9D9",
+              height: "100%",
+              borderRadius: "10px",
+            }}>
+            {transcript}
+          </div>
+        </div>
       </div>
+
+      {/* Text Input Area */}
       <div className="text-center justify-center">
-        <h1 className="text-6xl mb-10">what do you want to learn about?</h1>
         <div
           style={{
             display: "flex",
@@ -49,7 +64,6 @@ const LandingPage = () => {
               backgroundColor: "rgba(184, 166, 152, 0.5)",
               borderRadius: "10px 0 0 10px",
               color: "#5E5349",
-              fontFamily: "Comfortaa"
             }}
           />
           <Button
@@ -118,38 +132,10 @@ const LandingPage = () => {
             }}>
             {suggestionVal3}
           </Button>
-          <Button
-            type="submit"
-            className="text-xl"
-            onClick={() => {
-              handleEnterClick(suggestionVal4);
-            }}
-            style={{
-              height: "3em",
-              borderRadius: "10px",
-              backgroundColor: "rgba(184, 166, 152, 0.5)",
-              color: "#5E5349",
-            }}>
-            {suggestionVal4}
-          </Button>
-          <Button
-            type="submit"
-            className="text-xl"
-            onClick={() => {
-              handleEnterClick(suggestionVal5);
-            }}
-            style={{
-              height: "3em",
-              borderRadius: "10px",
-              backgroundColor: "rgba(184, 166, 152, 0.5)",
-              color: "#5E5349",
-            }}>
-            {suggestionVal5}
-          </Button>
         </div>
       </div>
     </div>
   );
 };
 
-export default LandingPage;
+export default LearnPage;
